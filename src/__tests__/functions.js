@@ -4,6 +4,24 @@ jest.dontMock("immutable");
 const u = require("../functions.js");
 const immutable = require("immutable");
 
+describe("is", () => {
+  it("compares immutable objects", () => {
+    let v1 = immutable.fromJS({"a": {"b": {"c": 1}}});
+    let v2 = immutable.fromJS({"a": {"b": {"c": 1}}});
+    expect(u.is(v1, v2)).toBeTruthy();
+    expect(u.is(v1, u.set(v2, "a", 3))).toBeFalsy();
+  });
+  it("compares primitives", () => {
+    expect(u.is(3, 3)).toBeTruthy();
+    expect(u.is(3, 4)).toBeFalsy();
+  });
+  it("compares JS objects", () => {
+    let a = {};
+    expect(u.is({}, {})).toBeFalsy();
+    expect(u.is(a, a)).toBeTruthy();
+  });
+});
+
 describe("updateIn", () => {
   it("handles nested updates correctly", () => {
     let v1 = immutable.fromJS({"a": {"b": {"c": 1}}});

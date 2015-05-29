@@ -1,3 +1,5 @@
+import immutable from "immutable";
+export function is(a, b) {return immutable.is(a, b); }
 export function swap(atom, func, ...args) {return atom.swap(func, ...args); }
 export function deref(ref) {return ref.deref(); }
 export function updateIn(val, keyPath, func, ...args) {return val.updateIn(keyPath, (x) => func(x, ...args)); }
